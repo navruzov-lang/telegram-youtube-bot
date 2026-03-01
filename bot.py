@@ -102,4 +102,22 @@ app.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, handle_link))
 app.add_handler(CallbackQueryHandler(download_video))
 
 print("Bot ishga tushdi 🚀")
+
+import threading
+from http.server import HTTPServer, BaseHTTPRequestHandler
+import os
+
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        self.send_response(200)
+        self.end_headers()
+        self.wfile.write(b"Bot is running")
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    server = HTTPServer(("0.0.0.0", port), Handler)
+    server.serve_forever()
+
+threading.Thread(target=run_web).start()
+
 app.run_polling()
