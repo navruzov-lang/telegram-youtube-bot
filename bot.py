@@ -9,7 +9,7 @@ from telegram.ext import (
     filters,
 )
 
-TOKEN = "8638132037:AAFIktnEveFj1oawLlgEkKV5UEYSWAYQDEk"
+TOKEN = "8638132037:AAGUUSWak2Fy8Um7Zmb_rgGtBJ13xVFjC_A"
 
 # Link qabul qilish
 async def handle_link(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -123,4 +123,5 @@ def run_web():
 threading.Thread(target=run_web).start()
 
 app.run_polling()
+
 
