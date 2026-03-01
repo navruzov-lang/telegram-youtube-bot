@@ -51,14 +51,15 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await query.edit_message_text("🎵 MP3 yuklanmoqda...")
 
     ydl_opts = {
-        "format": "bestaudio/best",
-        "outtmpl": "audio.%(ext)s",
-        "postprocessors": [{
-            "key": "FFmpegExtractAudio",
-            "preferredcodec": "mp3",
-            "preferredquality": "192",
-        }],
-    }
+    "format": "bestaudio/best",
+    "outtmpl": "audio.%(ext)s",
+    "cookiefile": "/etc/secrets/cookies.txt",   # 🔥 SHUNI QO‘SH
+    "postprocessors": [{
+        "key": "FFmpegExtractAudio",
+        "preferredcodec": "mp3",
+        "preferredquality": "192",
+    }],
+}
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -81,10 +82,11 @@ async def download_video(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await query.edit_message_text(f"⏳ {quality}p yuklanmoqda...")
 
     ydl_opts = {
-        "format": f"best[height<={quality}]/best",
-        "outtmpl": "video.%(ext)s",
-        "merge_output_format": "mp4",
-    }
+    "format": f"best[height<={quality}]/best",
+    "outtmpl": "video.%(ext)s",
+    "merge_output_format": "mp4",
+    "cookiefile": "/etc/secrets/cookies.txt",
+}
 
     try:
         with yt_dlp.YoutubeDL(ydl_opts) as ydl:
@@ -121,3 +123,4 @@ def run_web():
 threading.Thread(target=run_web).start()
 
 app.run_polling()
+
